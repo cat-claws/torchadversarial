@@ -12,11 +12,11 @@ requirements = [
 
 setup(
     # Metadata
-    name='torchiteration',
+    name='torchadversarial',
     version=VERSION,
     author='cat-claws',
     author_email='47313357+cat-claws@users.noreply.github.com',
-    url='https://github.com/cat-claws/torchiteration',
+    url='https://github.com/cat-claws/torchadversarial',
     long_description=readme,
     long_description_content_type='text/markdown',
     license='MIT',
