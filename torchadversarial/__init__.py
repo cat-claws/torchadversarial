@@ -1,1 +1,1 @@
-from .optim import FGSM, PGD
+from .fgsm import Fgsm
