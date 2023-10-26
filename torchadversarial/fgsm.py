@@ -156,7 +156,7 @@ def _single_tensor_fgsm(
 		grad = grad.sign() if not maximize else -grad.sign()
 		delta = grad * epsilon
 		delta = torch.clamp(delta, - epsilon - acc_delta, epsilon - acc_delta)
-		delta = torch.clamp(delta, a_min - param, a_max - param)
+		delta = torch.clamp(delta, param - a_max, param - a_min)
 	
 		acc_delta.add_(delta)
-		param.add_(delta)
+		param.add_(delta, alpha=-1)
