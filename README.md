@@ -79,3 +79,24 @@ for x_ in Attack(Fgsm, [x], epsilon=0.1, foreach=False, maximize=True):
 Please note that in the example above, ```x_[0]``` represents your adversarial example. Similar to other optimizers in ```torch.optim```, the input parameters (e.g., ```[x]```) must be an iterable containing tensors, and thus, we extract the adversarial example as ```x_[0]```.
 
 With Torch Adversarial, you can efficiently optimize inputs to your models and perform adversarial attacks for a wide range of applications.
+
+
+```python
+import torch
+from torchadversarial import Attack
+
+# Create an input tensor
+x = torch.rand(4, 3, 112, 112)
+
+# Apply the PGD attack to the input tensor
+for x_ in Attack(torch.optim.SGD, [x], steps = 10, foreach=False, maximize=True):
+    # Project variable to the constraint
+    with torch.no_grad():
+        x_[0].copy_(x_[0].clamp(x - 0.1, x + 0.1))
+    # Define an objective function (e.g., sum of tensor elements)
+    y = torch.sum(x_[0])
+    y.backward()
+
+# x_[0] now contains your adversarial example
+# print(x_[0])
+```
