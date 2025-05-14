@@ -9,8 +9,8 @@ class Attack(Iterator):
 	):
 		self._index = 0
 		self.params = [param.detach().clone().requires_grad_() for param in params]
+		self.steps = kwargs.pop('steps', 1)
 		self.optimizer = optimizer(self.params, **kwargs)
-		self.steps = kwargs.get('steps', 1)
 	
 	def __next__(self):
 		if self._index > 0:
